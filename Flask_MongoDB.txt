@@ -1,0 +1,40 @@
+# Web server - >
+#     a place where we can host somehting
+
+# web framework - >
+#     Used o create a web server
+# eg . Flask , Django , web2py , Bottle ,  CherryPy  These are python frameworks.
+
+
+#  Why does a devops engineer need to know this ?
+# ->   As a devops engineer hosting webserver are part of operations anda re crucial for any devops enginner,
+#       this helps to quickly grabs the problem and find solutions
+#       in order to know what is wrong one must understand how it works ...
+#
+
+
+#  What is REST API ?
+# ->    API - > Application programming interface
+# ->    REST - > A api that have some defenative pattern to it
+
+# A REST API (Representational State Transfer Application Programming Interface) is a way for different software systems to communicate over HTTP using a set of standard operations like GET, POST, PUT, and DELETE. REST APIs follow specific principles, such as statelessness and resource-based URLs, making them simple, scalable, and easy to use for web services.
+
+#  Request types in REST API :
+#  GET - > GET DATA  ( NO DATA FROM CLIENT GOES TO SERVER)
+# POST - > POST DATA  ( CLIENT DATA TO SERVER )
+
+# A REST API is a way for two computer programs to talk to each other over the internet. It uses simple rules and standard web methods like GET (to read data), POST (to add data), PUT (to update data), and DELETE (to remove data). REST APIs are easy to use, work with many types of programs, and help keep things organized and scalable.
+
+
+#    http://localhost:5000/home/data?time=10
+
+#  protocol---hostname--route
+
+
+# JSON : Way of storing Data  (similar to Python Dictionaries)
+#  {KEY : VALUE , Key : Value ,..... }
+
+# FLASK :
+# Flask is a lightweight and flexible Python web framework used to build web applications and REST APIs. It provides tools and libraries to create web servers, handle HTTP requests, and render web pages, making it easy to develop and deploy web-based solutions.
+
+

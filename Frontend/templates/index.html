@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workout Tracker</title>
+    <style>
+      body {
+        background: linear-gradient(120deg, #f7f9fa 60%, #cfe2f3 100%);
+        font-family: "Segoe UI", Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 420px;
+        margin: 20px auto;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+        padding: 36px 28px 32px 28px;
+        position: relative;
+        overflow: hidden;
+      }
+      .container::before {
+        content: "";
+        position: absolute;
+        top: -60px;
+        right: -60px;
+        width: 140px;
+        height: 140px;
+        background: rgba(49, 130, 206, 0.08);
+        border-radius: 50%;
+        z-index: 0;
+      }
+      h1 {
+        text-align: center;
+        color: #2d3748;
+        margin-bottom: 24px;
+        font-size: 2.2rem;
+        letter-spacing: 1px;
+        font-weight: 700;
+        position: relative;
+        z-index: 1;
+      }
+      form {
+        position: relative;
+        z-index: 1;
+      }
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: #4a5568;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+      input[type="text"],
+      input[type="number"] {
+        width: 100%;
+        padding: 12px;
+        border: 1.5px solid #cbd5e1;
+        border-radius: 6px;
+        font-size: 1rem;
+        margin-bottom: 22px;
+        box-sizing: border-box;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        background: #f8fafc;
+      }
+      input[type="text"]:focus,
+      input[type="number"]:focus {
+        border-color: #3182ce;
+        outline: none;
+        box-shadow: 0 0 0 2px #90cdf4;
+      }
+      input[type="submit"] {
+        width: 100%;
+        background: linear-gradient(90deg, #3182ce 60%, #2563eb 100%);
+        color: #fff;
+        border: none;
+        padding: 14px;
+        border-radius: 6px;
+        font-size: 1.08rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s, box-shadow 0.2s;
+        box-shadow: 0 2px 8px rgba(49, 130, 206, 0.08);
+        margin-top: 8px;
+      }
+      input[type="submit"]:hover {
+        background: linear-gradient(90deg, #2563eb 60%, #3182ce 100%);
+        box-shadow: 0 4px 16px rgba(49, 130, 206, 0.12);
+      }
+      .info {
+        margin-top: 36px;
+        text-align: center;
+        background: #f1f5f9;
+        border-radius: 6px;
+        padding: 16px 0 10px 0;
+        box-shadow: 0 1px 4px rgba(49, 130, 206, 0.04);
+      }
+      .info p {
+        color: #2b6cb0;
+        font-size: 1.1rem;
+        margin: 8px 0;
+        padding: 0;
+        font-weight: 500;
+      }
+      .view-btn {
+        display: block;
+        width: 100%;
+        background: linear-gradient(90deg, #38a169 60%, #2f855a 100%);
+        color: #fff;
+        border: none;
+        padding: 14px;
+        border-radius: 6px;
+        font-size: 1.08rem;
+        font-weight: 700;
+        cursor: pointer;
+        margin-top: 24px;
+        transition: background 0.2s, box-shadow 0.2s;
+        box-shadow: 0 2px 8px rgba(56, 161, 105, 0.08);
+      }
+      .view-btn:hover {
+        background: linear-gradient(90deg, #2f855a 60%, #38a169 100%);
+        box-shadow: 0 4px 16px rgba(56, 161, 105, 0.12);
+      }
+      a {
+        text-decoration: none;
+      }
+      .icon {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 8px;
+      }
+      .field-desc {
+        font-size: 0.92rem;
+        color: #718096;
+        margin-bottom: 16px;
+        margin-top: -16px;
+        margin-left: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <form action="/submit" method="POST">
+        <h1>
+          <span class="icon" aria-label="dumbbell" title="Workout"
+            >&#128170;</span
+          >
+          Workout Tracker
+        </h1>
+        <label for="workout">Workout:</label>
+      
+        <input
+          type="text"
+          id="workout"
+          name="workout"
+          placeholder="e.g. Running"
+          required
+        />
+        <label for="duration">Duration (minutes):</label>
+       
+        <input
+          type="number"
+          id="duration"
+          name="duration"
+          min="1"
+          placeholder="e.g. 30"
+          required
+        />
+        <label for="day">Day:</label>
+       
+        <input
+          type="text"
+          id="day"
+          name="day"
+          placeholder="e.g. Monday"
+          required
+        />
+        <input type="submit" value="Add Workout" />
+      </form>
+      <div class="info">
+        <p>
+          <span class="icon" aria-label="calendar" title="Day">&#128197;</span>
+          Today is <strong>{{ day_of_week }}</strong>
+        </p>
+        <p>
+          <span class="icon" aria-label="clock" title="Time">&#128337;</span>
+          Current time is <strong>{{ currentTime }}</strong>
+        </p>
+      </div>
+      <a href="get_data"
+        ><button type="button" class="view-btn">
+          <span class="icon" aria-label="list" title="View">&#128221;</span>
+          View Workouts
+        </button></a
+      >
+    </div>
+  </body>
+</html>

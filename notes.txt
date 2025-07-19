@@ -1,0 +1,54 @@
+Types of database
+
+1. Relational/ SQL database : database with tables and rows and columns (MySql , PostGres , Oracle , SQL sever , etc)
+
+2. NoSql/ Document database : database with collections and documents (MongoDb, CouchDb , etc..)
+
+3. Graph database : database with Nodes and edges (Neojs , etc...)
+
+4. Blob Stores : Database with blobs (Amazon s3 , Google cloud storage , etc...)
+
+Jinja is a template engine for Python web frameworks like Flask.
+
+In simple terms:
+Jinja lets you write HTML pages that can include Python-like code. This means you can insert variables, use loops, and add logic directly in your HTML files.
+
+Why we use it:
+
+It helps you create dynamic web pages.
+For example, in your code, you pass day_of_week to index.html:
+In index.html, you can use Jinja to show the day:
+Jinja replaces {{ day_of_week }} with the actual value (like "Monday") before sending the page to the user.
+Summary:
+Jinja makes it easy to mix Python data and logic into your HTML, so your web pages can change based on your code.
+@app.route('/second')
+def second():
+    return "Welcome to Second Page"
+# @app.route('/api/<name>')             # <> syntax for getting value
+# def name(name):
+#     # print(name)
+#     length = len(name)
+#     result = "Jello " + name + "!"
+#     return result
+#     # return 'welcome to name page fetched using api'
+# @app.route('/add/<a>/<b>')
+# def add(a, b):
+#     anss = int(a) + int(b)
+#     result = {
+#         'ans': anss
+#     }
+#     return result
+@app.route('/api')
+def name():
+    name = request.values.get('name')
+    age = request.values.get('age')
+    # result = {
+    #     'name': name,
+    #     'age': age
+    # }
+    # return result
+    age = int(age)
+    if age > 18:
+        return "Welcome to site"
+    else:
+        return "Sorry , you are not old enough !!! "

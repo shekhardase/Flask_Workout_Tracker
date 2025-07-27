@@ -25,7 +25,7 @@ def submit_todo():
         "itemName": item_name,
         "itemDescription": item_desc
     })
-    return "Item submitted!"g
+    return "Item submitted!"
 
 
 @app.route('/submit', methods=['POST'])

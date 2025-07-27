@@ -11,6 +11,7 @@ BACKEND_URL = 'http://127.0.0.1:9000'
 def home():
     day_of_week = datetime.today().strftime("%A")
     currentTime = datetime.now().strftime("%H:%M:%S")
+    print("this is current date and time (This is commit from new branch)")
     return render_template('index.html', day_of_week=day_of_week, currentTime=currentTime)
 
 

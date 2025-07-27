@@ -5,135 +5,203 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Workout Tracker</title>
     <style>
-      /* ...existing styles... */
-      .todo-container {
+      body {
+        background: linear-gradient(120deg, #f7f9fa 60%, #cfe2f3 100%);
+        font-family: "Segoe UI", Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
         max-width: 420px;
-        margin: 24px auto 0 auto;
+        margin: 20px auto;
         background: #fff;
         border-radius: 12px;
-        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
-        padding: 28px 24px 24px 24px;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+        padding: 36px 28px 32px 28px;
         position: relative;
         overflow: hidden;
       }
-      .todo-title {
+      .container::before {
+        content: "";
+        position: absolute;
+        top: -60px;
+        right: -60px;
+        width: 140px;
+        height: 140px;
+        background: rgba(49, 130, 206, 0.08);
+        border-radius: 50%;
+        z-index: 0;
+      }
+      h1 {
         text-align: center;
         color: #2d3748;
-        margin-bottom: 18px;
-        font-size: 1.4rem;
+        margin-bottom: 24px;
+        font-size: 2.2rem;
+        letter-spacing: 1px;
+        font-weight: 700;
+        position: relative;
+        z-index: 1;
+      }
+      form {
+        position: relative;
+        z-index: 1;
+      }
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: #4a5568;
         font-weight: 600;
         letter-spacing: 0.5px;
       }
-      .todo-input-row {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 18px;
-      }
-      .todo-input-row input[type="text"] {
-        flex: 1;
-        padding: 10px;
+      input[type="text"],
+      input[type="number"] {
+        width: 100%;
+        padding: 12px;
         border: 1.5px solid #cbd5e1;
         border-radius: 6px;
         font-size: 1rem;
+        margin-bottom: 22px;
+        box-sizing: border-box;
+        transition: border-color 0.2s, box-shadow 0.2s;
         background: #f8fafc;
       }
-      .todo-input-row button {
-        background: #3182ce;
+      input[type="text"]:focus,
+      input[type="number"]:focus {
+        border-color: #3182ce;
+        outline: none;
+        box-shadow: 0 0 0 2px #90cdf4;
+      }
+      input[type="submit"] {
+        width: 100%;
+        background: linear-gradient(90deg, #3182ce 60%, #2563eb 100%);
         color: #fff;
         border: none;
-        padding: 10px 18px;
+        padding: 14px;
         border-radius: 6px;
-        font-size: 1rem;
-        font-weight: 600;
+        font-size: 1.08rem;
+        font-weight: 700;
         cursor: pointer;
-        transition: background 0.2s;
+        transition: background 0.2s, box-shadow 0.2s;
+        box-shadow: 0 2px 8px rgba(49, 130, 206, 0.08);
+        margin-top: 8px;
       }
-      .todo-input-row button:hover {
-        background: #2563eb;
+      input[type="submit"]:hover {
+        background: linear-gradient(90deg, #2563eb 60%, #3182ce 100%);
+        box-shadow: 0 4px 16px rgba(49, 130, 206, 0.12);
       }
-      .todo-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-      .todo-list li {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+      .info {
+        margin-top: 36px;
+        text-align: center;
         background: #f1f5f9;
-        border-radius: 5px;
-        padding: 10px 12px;
-        margin-bottom: 10px;
-        font-size: 1rem;
-        color: #2d3748;
+        border-radius: 6px;
+        padding: 16px 0 10px 0;
+        box-shadow: 0 1px 4px rgba(49, 130, 206, 0.04);
       }
-      .todo-list li.completed {
-        text-decoration: line-through;
-        color: #94a3b8;
-        background: #e2e8f0;
+      .info p {
+        color: #2b6cb0;
+        font-size: 1.1rem;
+        margin: 8px 0;
+        padding: 0;
+        font-weight: 500;
       }
-      .todo-list button {
-        background: #e53e3e;
+      .view-btn {
+        display: block;
+        width: 100%;
+        background: linear-gradient(90deg, #38a169 60%, #2f855a 100%);
         color: #fff;
         border: none;
-        border-radius: 4px;
-        padding: 4px 10px;
-        font-size: 0.95rem;
+        padding: 14px;
+        border-radius: 6px;
+        font-size: 1.08rem;
+        font-weight: 700;
         cursor: pointer;
-        margin-left: 8px;
-        transition: background 0.2s;
+        margin-top: 24px;
+        transition: background 0.2s, box-shadow 0.2s;
+        box-shadow: 0 2px 8px rgba(56, 161, 105, 0.08);
       }
-      .todo-list button:hover {
-        background: #c53030;
+      .view-btn:hover {
+        background: linear-gradient(90deg, #2f855a 60%, #38a169 100%);
+        box-shadow: 0 4px 16px rgba(56, 161, 105, 0.12);
+      }
+      a {
+        text-decoration: none;
+      }
+      .icon {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 8px;
+      }
+      .field-desc {
+        font-size: 0.92rem;
+        color: #718096;
+        margin-bottom: 16px;
+        margin-top: -16px;
+        margin-left: 2px;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <!-- ...existing code... -->
-    </div>
+      <label>Item ID:</label>
+      <input type="number" name="itemId" /><br />
+      <label>Item UUID:</label>
+      <input type="text" name="itemUuid" /><br />
+      <label>Item Hash:</label>
+      <input type="text" name="itemHash" /><br />
 
-    <!-- Simple To Do List -->
-    <div class="todo-container">
-      <div class="todo-title">To Do List</div>
-      <div class="todo-input-row">
-        <input type="text" id="todo-input" placeholder="Add a new task..." />
-        <button onclick="addTodo()">Add</button>
+      <form action="/submit" method="POST">
+        <h1>
+          <span class="icon" aria-label="dumbbell" title="Workout"
+            >&#128170;</span
+          >
+          Workout Tracker
+        </h1>
+        <label for="workout">Workout:</label>
+
+        <input
+          type="text"
+          id="workout"
+          name="workout"
+          placeholder="e.g. Running"
+          required
+        />
+        <label for="duration">Duration (minutes):</label>
+
+        <input
+          type="number"
+          id="duration"
+          name="duration"
+          min="1"
+          placeholder="e.g. 30"
+          required
+        />
+        <label for="day">Day:</label>
+
+        <input
+          type="text"
+          id="day"
+          name="day"
+          placeholder="e.g. Monday"
+          required
+        />
+        <input type="submit" value="Add Workout" />
+      </form>
+      <div class="info">
+        <p>
+          <span class="icon" aria-label="calendar" title="Day">&#128197;</span>
+          Today is <strong>{{ day_of_week }}</strong>
+        </p>
+        <p>
+          <span class="icon" aria-label="clock" title="Time">&#128337;</span>
+          Current time is <strong>{{ currentTime }}</strong>
+        </p>
       </div>
-      <ul class="todo-list" id="todo-list"></ul>
+      <a href="get_data"
+        ><button type="button" class="view-btn">
+          <span class="icon" aria-label="list" title="View">&#128221;</span>
+          View Workouts
+        </button></a
+      >
     </div>
-    <script>
-      // Simple To Do List logic
-      const todoInput = document.getElementById("todo-input");
-      const todoList = document.getElementById("todo-list");
-
-      function addTodo() {
-        const task = todoInput.value.trim();
-        if (task === "") return;
-        const li = document.createElement("li");
-        li.textContent = task;
-
-        // Complete button
-        li.addEventListener("click", function () {
-          li.classList.toggle("completed");
-        });
-
-        // Delete button
-        const delBtn = document.createElement("button");
-        delBtn.textContent = "Delete";
-        delBtn.onclick = function (e) {
-          e.stopPropagation();
-          todoList.removeChild(li);
-        };
-        li.appendChild(delBtn);
-
-        todoList.appendChild(li);
-        todoInput.value = "";
-      }
-
-      todoInput.addEventListener("keydown", function (e) {
-        if (e.key === "Enter") addTodo();
-      });
-    </script>
   </body>
 </html>
